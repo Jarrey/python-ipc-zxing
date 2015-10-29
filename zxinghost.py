@@ -1,19 +1,19 @@
 #!/usr/bin/python
-import os, subprocess, datetime
+import os, subprocess, datetime, time
 
-class zxing_host:
-    __libs__ = ["javase.jar", "core.jar"]
+class zxinghost:
     __java_host__ = "zxingHost"
-    def __init__(self, libs_loc = '.'):    
-        libs = [libs_loc + "/" + l for l in self.__libs__]
-        libs.insert(0, ".")
+    def __init__(self, loc = './', zxing_libs = ["core.jar", "javase.jar"]):    
+        libs = [loc + l for l in zxing_libs]
+        libs.insert(0, loc)
         cmd = ["java", "-cp", os.pathsep.join(libs), self.__java_host__]
         try:
             self.__zxing_process = subprocess.Popen(cmd,
-                                                    shell=True,
+                                                    shell=False,
                                                     stdin=subprocess.PIPE,
                                                     stdout=subprocess.PIPE,
                                                     universal_newlines=True)
+            time.sleep(1)
         except Exception as error:
             ptint(error)
             raise error
@@ -51,9 +51,10 @@ class zxing_host:
 
         
 if __name__ == '__main__':
-    zxing = zxing_host('zxing3.2.1')
-    for i in range(50):
-        print(str(datetime.datetime.now().time()))
+    zxing_loc = "zxing2.2/"
+    zxing = zxinghost('./', [zxing_loc + "core.jar", zxing_loc + "javase.jar"])
+    for i in range(10):
+        print("{0} - {1}".format(datetime.datetime.now().time(), i))
         out = zxing.encode('"Welcome to Python.org"', 'test.png')
         print("{0} - {1}".format(datetime.datetime.now().time(), out))
         out = zxing.decodeBase64(

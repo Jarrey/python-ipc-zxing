@@ -1,14 +1,14 @@
 #Compile Java zxing host:#
 
 (Windows) : `javac -cp zxing3.2.1/core.jar;zxing3.2.1/javase.jar zxingHost.java`
-
 (Linux) : `javac -cp zxing3.2.1/core.jar:zxing3.2.1/javase.jar zxingHost.java`
 
 #Run and test in console by Java:#
 
-(Windows) : `java -cp .;zxing3.2.1/core.jar;zxing3.2.1/javase.jar zxingHost`
+(Windows) : `java -cp ./;./zxing3.2.1/* zxingHost`
+(Linux) : `java -cp ./:./zxing3.2.1/core.jar:./zxing3.2.1/javase.jar zxingHost`
 
-(Linux) : `java -cp .:zxing3.2.1/core.jar:zxing3.2.1/javase.jar zxingHost`
+## Please note: zxing3.2.1 does not supoort in JDK 6. Please use zxing2.2 in JDK 6. ##
 
 #Support commands:#
 
